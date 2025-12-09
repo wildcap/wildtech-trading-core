@@ -16,4 +16,15 @@ enum Timeframe {
   static Timeframe fromJson(dynamic json) => Timeframe.values[json as int];
 
   dynamic toJson() => index;
+
+  /// Returns the Timeframe with the given [intervalMinutes], or this if unchanged.
+  Timeframe copyWith({int? intervalMinutes}) {
+    if (intervalMinutes == null || intervalMinutes == this.intervalMinutes) {
+      return this;
+    }
+    return Timeframe.values.firstWhere(
+      (tf) => tf.intervalMinutes == intervalMinutes,
+      orElse: () => this,
+    );
+  }
 }
